@@ -1,0 +1,63 @@
+###
+### A complete description of a Prefect Deployment for flow 'injest'
+###
+name: scheduled_twitter_prefect_deployment
+description: main flow function
+version: 1b09108e207c898fc0b8b112678aa6b3
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+work_pool_name: null
+tags: []
+parameters: {}
+schedule:
+  cron: '*/15 * * * *'
+  timezone: null
+  day_or: true
+is_schedule_active: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: injest
+manifest_path: null
+storage: null
+path: /home/david/tweeter_project
+entrypoint: injest_tweet.py:etl_gcp
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    consumer_key:
+      title: consumer_key
+      default: 76sTjtgjd4P0eJeiOmFPM35Gj
+      position: 0
+      type: string
+    consumer_secret:
+      title: consumer_secret
+      default: BEogHFQFO4a104kTYQBby6WR7kK3SI0Ds410iP3DasKF0tJQ28
+      position: 1
+      type: string
+    access_token:
+      title: access_token
+      default: 2802478030-P5DCkBIuIzyUuuYfM9jbaHl0mB4kIg1VjTEL2S4
+      position: 2
+      type: string
+    access_token_secret:
+      title: access_token_secret
+      default: flkOS0kGoFBl8CabuOaL3CX3C9R5I6oYcb2039gHMTvG2
+      position: 3
+      type: string
+  required: null
+  definitions: null
+timestamp: '2023-04-01T12:51:45.099142+00:00'
