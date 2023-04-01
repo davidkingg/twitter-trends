@@ -1,0 +1,44 @@
+#### docs
+https://prefecthq.github.io/prefect-gcp/
+https://prefecthq.github.io/prefect-gcp/examples_catalog/#cloud-storage-module
+https://docs.prefect.io/concepts/deployments/
+
+############ pipeline planning ##############
+#run dashboard
+prefect orion start
+
+## register a gcp module
+prefect block register -m prefect_gcp
+
+### fill then environment variables with the required information
+
+### create a storage block/credential block
+python gcp_storage_block.py  
+
+
+################### Deployment #################################
+https://docs.prefect.io/concepts/deployments/
+
+### create the deployment file
+prefect deployment build ./injest_tweet.py:etl_gcp -n 'twitter_prefect_deployment' ### prefect deployment build {path to pipelin script}:{parent flow} -n 'twitter_deployment'
+
+
+#### you can now edit the .yaml file to add your paramaters
+
+
+## apply the deployment yaml file
+prefect deployment apply etl_gcp-deployment.yaml
+
+#### to make a flow run, we need an agent to pick up the run
+prefect agent start --pool default-agent-pool --work-queue default
+
+
+
+#################################### scheduling the flow ######################
+prefect deployment build ./injest_tweet.py:etl_gcp -n 'scheduled_twitter_prefect_deployment' --cron "*/15 * * * *" -a ###### -a is to apply the deployment
+
+
+######################## dockerizing the flow #############
+# make the docker file
+
+
