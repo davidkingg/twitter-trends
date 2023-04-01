@@ -1,0 +1,19 @@
+## working with environment variables
+
+## install this package to read the environment variables
+pip install python-dotenv
+
+### create a .env file and save the variables like this
+DEBUG=true
+DATABASE_URL=sqlite:///mydb.sqlite
+
+### to import the .env in the python scripts
+>>> from dotenv import load_dotenv
+>>> load_dotenv()
+
+##### to access a variable
+os.environ.get('DATABASE_URL', 'sqlite:///') ##'sqlite:///' is the default value if the 'DATABASE_URL' is not found in the enviroment variables
+
+
+
+

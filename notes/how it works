@@ -1,0 +1,78 @@
+environment variables
+The environment variables are sectioned into 3
+1. prefect - this contains variables related to prefect 
+2. GCP - this contains variabled related to google cloud platform e.g project_id
+3. Twitter - this contains variable related to the twitter api e.g consumer_key
+
+Replace the variables defined in the .env
+
+
+## installing docker
+sudo apt-get update
+sudo apt-get install docker.io
+sudo groupadd docker
+sudo gpasswd -a $USER docker
+sudo service docker restart
+
+## installing docker compose
+mkdir bin
+cd bin
+wget https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -O docker-compose
+chmod +x docker-compsose
+cd ~
+nano .bashrc
+# add this line to the .bashrc to add the bin path to the environment variables
+export PATH="${HOME}/bin:${PATH}"
+which docker-compose
+
+Google setup
+1. create a project on GCP
+2. create a service account with cloud storage, bigque
+from project directory, run the following commands
+3. #set the credentials to the folder containg the json
+export GOOGLE_APPLICATION_CREDENTIALS=~./twitter_project.json
+4. #authenticat with
+gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+
+
+terrafoam
+1. insatll terrafoam on the local machine or cloud platform
+2. cd bin
+3. wget https://releases.hashicorp.com/terraform/1.3.7/terraform_1.3.7_linux_amd64.zip
+4. sudo apt install unzip
+5. unzip terra*
+6. rm terraform_*
+6. in the terrform variables.tf file, replace the project default value with your gcp project id
+7. from projec directory, run the following commands
+    - terraform init
+    - terraform plan
+    - terraform apply
+
+
+
+# pyspark
+from project root directory
+1. cd spark
+2. source build.sh
+3. docker compose up -d
+4. chmod +x run-docker.sh
+
+
+prefect
+# to run the prefect dashboard server
+prefect orion start
+
+# register a gcp module
+prefect block register -m prefect_gcp
+
+# create a storage block and credential block
+python gcp_storage_block.py  
+
+# to create a prefect worker agent
+prefect agent start --pool default-agent-pool --work-queue default,
+
+# deploy the flow and tasks with a schedule to run every 15mins
+prefect deployment build ./injest_tweet.py:etl_gcp -n 'scheduled_twitter_prefect_deployment' --cron "*/15 * * * *" -a
+
+
+
