@@ -6,7 +6,7 @@ version: "3.6"
 networks:
   default:
     name: kafka-spark-network
-    external: true
+   # external: true
 
 services:
   # jupyterlab:
