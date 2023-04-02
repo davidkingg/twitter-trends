@@ -12,7 +12,11 @@ terraform {
 provider "google" {
   project = var.project
   region = var.region
+<<<<<<< HEAD
  # credentials = "${file("twitter-project.json")}"  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
+=======
+#  credentials = "${file("twitter-project.json")}"  # Use this if you do not want to set env-var GOOGLE_APPLICATION_CREDENTIALS
+>>>>>>> e7bb61289d6c19312f567ab78810f3e378ad0ad7
 }
 
 # Data Lake Bucket
