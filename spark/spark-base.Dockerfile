@@ -21,10 +21,10 @@ ENV PYSPARK_PYTHON python3
 # -- Runtime
 
 WORKDIR ${SPARK_HOME}
-COPY ../twitter_project.json  /opt/workspace
+COPY ./twitter_project.json  /opt/workspace
 COPY gcs-connector-hadoop3-2.2.5.jar ${SPARK_HOME}/jars
 COPY spark-bigquery-latest_2.12.jar ${SPARK_HOME}/jars
-COPY fhvhv_tripdata_2021-06.csv.gz /opt/workspace
+#COPY fhvhv_tripdata_2021-06.csv.gz /opt/workspace
 
 RUN chmod 644 ${SPARK_HOME}/jars/gcs-connector-hadoop3-2.2.5.jar
 RUN chmod 644 ${SPARK_HOME}/jars/spark-bigquery-latest_2.12.jar
