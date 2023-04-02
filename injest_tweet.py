@@ -1,4 +1,3 @@
-
 import pandas as pd
 from time import time
 from sqlalchemy import create_engine, text
@@ -46,9 +45,9 @@ def extract(api: tweepy.api) -> list:
 @task(log_prints=True)
 def transform(info: list) -> list:
     data = info[0]['trends']
-    date = pd.to_datetime(info[0]['as_of']).date()
-    hour = pd.to_datetime(info[0]['as_of']).hour
-    minute = pd.to_datetime(info[0]['as_of']).minute
+    date = pd.to_datetime(info[0]['as_of']).tz_convert(timezone).date()
+    hour = pd.to_datetime(info[0]['as_of']).tz_convert(timezone).hour
+    minute = pd.to_datetime(info[0]['as_of']).tz_convert(timezone).minute
 
     df = pd.DataFrame(data).sort_values('tweet_volume', ascending=False)
 

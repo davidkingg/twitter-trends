@@ -3,7 +3,7 @@
 ###
 name: scheduled_twitter_prefect_deployment
 description: main flow function
-version: 1b09108e207c898fc0b8b112678aa6b3
+version: 83ea410d13abf6885171db00fa9e7247
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
@@ -13,6 +13,12 @@ schedule:
   timezone: null
   day_or: true
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: injest
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -21,14 +27,11 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: 7296e1e4-ab07-477a-ac12-a8f89c19445a
+  _block_document_name: anonymous-73cc82f6-c4e0-49a5-a08a-0ad31e03ff6a
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: injest
-manifest_path: null
 storage: null
 path: /home/david/twitter-trends
 entrypoint: injest_tweet.py:etl_gcp
