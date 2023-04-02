@@ -6,14 +6,12 @@ description: main flow function
 version: 1b09108e207c898fc0b8b112678aa6b3
 # The work queue that will handle this deployment's runs
 work_queue_name: default
-work_pool_name: null
 tags: []
 parameters: {}
 schedule:
   cron: '*/15 * * * *'
   timezone: null
   day_or: true
-is_schedule_active: null
 infra_overrides: {}
 infrastructure:
   type: process
@@ -32,7 +30,7 @@ infrastructure:
 flow_name: injest
 manifest_path: null
 storage: null
-path: /home/david/tweeter_project
+path: /home/david/twitter-trends
 entrypoint: injest_tweet.py:etl_gcp
 parameter_openapi_schema:
   title: Parameters
@@ -60,4 +58,3 @@ parameter_openapi_schema:
       type: string
   required: null
   definitions: null
-timestamp: '2023-04-01T12:51:45.099142+00:00'
