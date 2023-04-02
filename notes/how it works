@@ -96,7 +96,7 @@ from project root directory run
 
 ### prefect
 ##### to run the prefect dashboard server
-prefect orion start --detach
+prefect orion start
 
 ##### register a gcp module
 prefect block register -m prefect_gcp
