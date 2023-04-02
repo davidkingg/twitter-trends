@@ -73,17 +73,17 @@ hashtags_1hr = hashtags.groupBy('name').agg({'minute':'count'}).withColumnRename
 
 
 ##################################### write to bigquery  ##############################################
-hashtags.drop_duplicates(['name']).write.format('bigquery') \
+hashtags.groupBy('name').agg({'date':'first', 'hour':'max', 'minute':'max', 'tweet_volume':'max'}).write.format('bigquery') \
   .option('table', 'twitter_data.hashtags') \
   .mode("overwrite") \
   .save()
 
-top_trending.drop_duplicates(['name']).write.format('bigquery') \
+top_trending.groupBy('name').agg({'date':'first', 'hour':'max', 'minute':'max', 'tweet_volume':'max'}).write.format('bigquery') \
   .option('table', 'twitter_data.top_trending') \
   .mode("overwrite") \
   .save()
 
-emerging_trends.drop_duplicates(['name']).write.format('bigquery') \
+emerging_trends.groupBy('name').agg({'date':'first', 'hour':'max', 'minute':'max', 'tweet_volume':'max'}).write.format('bigquery') \
   .option('table', 'twitter_data.emerging_trends') \
   .mode("overwrite") \
   .save()
