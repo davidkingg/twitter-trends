@@ -53,23 +53,42 @@ top_trending = spark.read.parquet(f'gs://twitter_data_twitter-project-381411/dat
                 .drop('__index_level_0__') 
 top_trending = top_trending.filter((top_trending.hour==hour)|(top_trending.hour==hour-1))
 
+low_trending = spark.read.parquet(f'gs://twitter_data_twitter-project-381411/data/{date}/low_trending') \
+                .drop('__index_level_0__') 
+low_trending = top_trending.filter((top_trending.hour==hour)|(top_trending.hour==hour-1))
+
 emerging_trends = spark.read.parquet(f'gs://twitter_data_twitter-project-381411/data/{date}/emerging_trends/') \
                 .drop('__index_level_0__') 
 emerging_trends = emerging_trends.filter((emerging_trends.hour==hour)|(emerging_trends.hour==hour-1))
 
 
-# getting the trend in the last 15mins
-# top_trending_15=top_trending.drop_duplicates('name')
-# emerging_trends_15=emerging_trends[emerging_trends['minute']==emerging_trends['minute'].max()]
-# hashtags_15=hashtags[hashtags['minute']==hashtags['minute'].max()]
-
-
-# getting the trends in the last 1 hour
+# getting the emerging trends in the last 1 hour
 emerging_trends_1hr = emerging_trends.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count')
 
-top_trending_1hr = top_trending.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count')
+# updating emerging to last 15mins
+emerging_trends = emerging_trends.filter(emerging_trends.hour==hour)
+emerging_trends = emerging_trends.filter((emerging_trends.hour==hour)&(emerging_trends.minute==emerging_trends.agg({'minute':'max'}).collect()[0][0])).sample(0.7)
 
-hashtags_1hr = hashtags.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count')       
+# getting the top trends in the last 1 hour
+top_trending_1hr = top_trending.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count').sort('count',ascending=False)
+
+# updating top trending to last 15mins
+top_trending = top_trending.filter(top_trending.hour==hour)
+top_trending = top_trending.filter((top_trending.hour==hour)&(top_trending.minute==top_trending.agg({'minute':'max'}).collect()[0][0])).sample(0.7)
+
+# getting the low trends by volume in the last 1 hour
+low_trending_1hr = low_trending.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count').sort('count',ascending=False)
+
+# updating low trends by volume to last 15mins
+low_trending = low_trending.filter(low_trending.hour==hour)
+low_trending = low_trending.filter((low_trending.hour==hour)&(low_trending.minute==low_trending.agg({'minute':'max'}).collect()[0][0])).sample(0.7)
+
+# getting the hashtags in the last 1 hour
+hashtags_1hr = hashtags.groupBy('name').agg({'minute':'count'}).withColumnRenamed('count(minute)','count')   
+
+# updating hashatgs to last 15mins
+hashtags = hashtags.filter(hashtags.hour==hour)
+hashtags = hashtags.filter((hashtags.hour==hour)&(hashtags.minute==hashtags.agg({'minute':'max'}).collect()[0][0])).sample(1.0)
 
 
 ##################################### write to bigquery  ##############################################
@@ -80,6 +99,11 @@ hashtags.groupBy('name').agg({'date':'first', 'hour':'first', 'tweet_volume':'ma
 
 top_trending.groupBy('name').agg({'date':'first', 'hour':'first', 'tweet_volume':'max'}).write.format('bigquery') \
   .option('table', 'twitter_data.top_trending') \
+  .mode("overwrite") \
+  .save()
+
+low_trending.groupBy('name').agg({'date':'first', 'hour':'first', 'tweet_volume':'max'}).write.format('bigquery') \
+  .option('table', 'twitter_data.low_trending') \
   .mode("overwrite") \
   .save()
 
@@ -103,17 +127,22 @@ emerging_trends.groupBy('name').agg({'date':'first', 'hour':'first', 'tweet_volu
 #   .mode("overwrite") \
 #   .save()
 
-top_trending_1hr.write.format('bigquery') \
+top_trending_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
   .option('table', 'twitter_data.top_trending_1hr') \
   .mode("overwrite") \
   .save()
 
-hashtags_1hr.write.format('bigquery') \
+low_trending_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
+  .option('table', 'twitter_data.low_trending_1hr') \
+  .mode("overwrite") \
+  .save()
+
+hashtags_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
   .option('table', 'twitter_data.hashtags_1hr') \
   .mode("overwrite") \
   .save()
 
-emerging_trends_1hr.write.format('bigquery') \
+emerging_trends_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
   .option('table', 'twitter_data.emerging_trends_1hr') \
   .mode("overwrite") \
   .save()

@@ -56,22 +56,24 @@ def transform(info: list) -> list:
     df['minute'] = minute
 
     newly_trending=df[(df['tweet_volume'].isna())&(df['name'].str[0]!='#')]
-    trending = df[(df['tweet_volume'].notna())&(df['name'].str[0]!='#')].head(7)
-    hashtags = df[(df['name'].str[0]=='#')].head(7)
+    trending = df[(df['tweet_volume'].notna())&(df['name'].str[0]!='#')]
+    top_trending_by_volume = trending[trending['tweet_volume']>=trending['tweet_volume'].median()]
+    low_trending_by_volume = trending[trending['tweet_volume']<trending['tweet_volume'].median()]
+    hashtags = df[(df['name'].str[0]=='#')]
 
-    return [newly_trending, trending, hashtags]
+    return [newly_trending, trending, hashtags, top_trending_by_volume, low_trending_by_volume]
 
 
 @task
-def write_gcp(newly_trending: pd.DataFrame, trending: pd.DataFrame, hashtags: pd.DataFrame):
+def write_gcp(newly_trending: pd.DataFrame, trending: pd.DataFrame, hashtags: pd.DataFrame, top_trending_by_volume: pd.DataFrame, low_trending_by_volume: pd.DataFrame):
     """writing to gcp"""
     #f'./{color}/{color}_tripdata_{year}-{month}.parquet'
 
     date = str(datetime.datetime.now(tz = timezone).date())
 
     time_st = str(datetime.datetime.now(tz = timezone).hour)+'-h'+str(datetime.datetime.now(tz = timezone).minute)
-    dfs=[newly_trending,trending, hashtags]
-    folders = ['emerging_trends','top_trending', 'hashtags']
+    dfs=[newly_trending,trending, hashtags, top_trending_by_volume, low_trending_by_volume]
+    folders = ['emerging_trends','trending', 'hashtags', 'top_trending', 'low_trending']
     for i in range(len(dfs)):
         gcp_bucket = GcsBucket.load(os.getenv('TWITTER_BUCKET_BLOCK_NAME'))
 
@@ -111,7 +113,7 @@ def etl_gcp(consumer_key: str = os.getenv('CONSUMER_KEY'),
 
     dataframes = transform(info=info)
 
-    write_gcp(dataframes[0], dataframes[1], dataframes[2])
+    write_gcp(dataframes[0], dataframes[1], dataframes[2], dataframes[3], dataframes[4])
 
     result = gcp_to_bigquery_spark()
 
