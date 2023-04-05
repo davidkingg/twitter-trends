@@ -55,7 +55,7 @@ top_trending = top_trending.filter((top_trending.hour==hour)|(top_trending.hour=
 
 low_trending = spark.read.parquet(f'gs://twitter_data_twitter-project-381411/data/{date}/low_trending') \
                 .drop('__index_level_0__') 
-low_trending = top_trending.filter((top_trending.hour==hour)|(top_trending.hour==hour-1))
+low_trending = low_trending.filter((low_trending.hour==hour)|(low_trending.hour==hour-1))
 
 emerging_trends = spark.read.parquet(f'gs://twitter_data_twitter-project-381411/data/{date}/emerging_trends/') \
                 .drop('__index_level_0__') 
