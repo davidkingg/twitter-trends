@@ -127,22 +127,22 @@ emerging_trends.groupBy('name').agg({'date':'first', 'hour':'first', 'tweet_volu
 #   .mode("overwrite") \
 #   .save()
 
-top_trending_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
+top_trending_1hr.withColumn('count', F.col('count') * 15/60).withColumnRenamed('count','hour').write.format('bigquery') \
   .option('table', 'twitter_data.top_trending_1hr') \
   .mode("overwrite") \
   .save()
 
-low_trending_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
+low_trending_1hr.withColumn('count', F.col('count') * 15/60).withColumnRenamed('count','hour').write.format('bigquery') \
   .option('table', 'twitter_data.low_trending_1hr') \
   .mode("overwrite") \
   .save()
 
-hashtags_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
+hashtags_1hr.withColumn('count', F.col('count') * 15/60).withColumnRenamed('count','hour').write.format('bigquery') \
   .option('table', 'twitter_data.hashtags_1hr') \
   .mode("overwrite") \
   .save()
 
-emerging_trends_1hr.withColumn('count', F.col('count') * 15/60).write.format('bigquery') \
+emerging_trends_1hr.withColumn('count', F.col('count') * 15/60).withColumnRenamed('count','hour').write.format('bigquery') \
   .option('table', 'twitter_data.emerging_trends_1hr') \
   .mode("overwrite") \
   .save()
