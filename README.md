@@ -1,7 +1,7 @@
 # Twitter Trends in Nigeria
-this is a data engineering project that fetches the trending keyworks in nigeria every 15mins. \n
-the trending data is saved to a data lake(google cloud storage). \n
-with pyspark running in a docker container, a batch processing is done every 15mins to carry out the following functions \n
+This is a data engineering project that fetches the trending keyworks in nigeria every 15mins.
+The trending data is saved to a data lake(google cloud storage).
+With pyspark running in a docker container, a batch processing is done every 15mins to carry out the following functions \n
     - fetch the current day trending keywords from the data lake
     - extract top trending keywords by volume in the last 2 hours
     - extract newly emerging trending keywords in the last 1 hour
