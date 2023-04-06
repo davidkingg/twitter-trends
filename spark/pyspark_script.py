@@ -88,7 +88,7 @@ hashtags_1hr = hashtags.groupBy('name').agg({'minute':'count'}).withColumnRename
 
 # updating hashatgs to last 15mins
 hashtags = hashtags.filter(hashtags.hour==hour)
-hashtags = hashtags.filter((hashtags.hour==hour)&(hashtags.minute==hashtags.agg({'minute':'max'}).collect()[0][0])).sample(1.0)
+hashtags = hashtags.filter((hashtags.hour==hour)&(hashtags.minute==hashtags.agg({'minute':'max'}).collect()[0][0])).sample(0.6)
 
 
 ##################################### write to bigquery  ##############################################
