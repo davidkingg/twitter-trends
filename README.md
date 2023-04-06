@@ -6,10 +6,10 @@ The trending data is gotten from twitter trends Api and saved to a data lake(goo
 The trends are gotten every 15 minutes and this process is ochestrated with PREFECT.  
 
 With pyspark running in a docker container, a batch process is submitted every 15mins to carry out the following functions:  
-1. fetch the current day trending keywords from the data lake
-2. extract top trending keywords by volume in the last 2 hours
-3. extract newly emerging trending keywords in the last 1 hour
-4.  save both top trending and emerging trends to a data warehouse (bigquery)
+1. Fetch the current day trending keywords from the data lake
+2. Extract top trending keywords by volume in the last 2 hours
+3. Extract newly emerging trending keywords in the last 1 hour
+4. Save both top trending and emerging trends to a data warehouse (bigquery)
 
 # Dashbord link to visualize the trending tweets in nigeria
 https://lookerstudio.google.com/reporting/9c44d5b0-c85e-4061-9d68-65c0ce5946d4
