@@ -1,7 +1,10 @@
 # Twitter Trends in Nigeria
 This is a data engineering project that fetches the trending keyworks in nigeria every 15mins.  
+
 The trending data is gotten from twitter trends Api and saved to a data lake(google cloud storage).  
+
 The trends are gotten every 15 minutes and this process is ochestrated with PREFECT.  
+
 With pyspark running in a docker container, a batch process is submitted every 15mins to carry out the following functions
     - fetch the current day trending keywords from the data lake
     - extract top trending keywords by volume in the last 2 hours
