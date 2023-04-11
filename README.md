@@ -1,4 +1,4 @@
-# Twitter Trends in Nigeria ![twitter](https://github.com/davidkingg/twitter-trends/blob/main/utills/twitter-logo-2429%20(1).png)
+# Twitter Trends in Nigeria   ![twitter](https://github.com/davidkingg/twitter-trends/blob/main/utills/twitter-logo-2429%20(1).png)
 ## Data Engineer Zoomcamp Capstone Project 
 
 This capstone project was developed under the scope of the [Data Engineer Zoomcamp by DataTalksClub](https://github.com/DataTalksClub/data-engineering-zoomcamp) (the biggest Data community in the internet - [DTC](https://datatalks.club/)).
@@ -79,8 +79,7 @@ on your home directory run the following commands
 4. chmod +x docker-compose
 5. cd ~
 6. nano .bashrc
-# add this line to the .bashrc to add the bin path to the environment variables
-7. export PATH="${HOME}/bin:${PATH}"
+7. add this line to the .bashrc to export the bin path to the environment variables : export PATH="${HOME}/bin:${PATH}"
 8. which docker-compose
 
 
@@ -127,19 +126,19 @@ from project root directory run
 
 
 ### prefect
-##### to run the prefect dashboard server
+#### to run the prefect dashboard server
 prefect orion start
 
-##### register a gcp module
+#### register a gcp module
 prefect block register -m prefect_gcp
 
-##### create a storage block and credential block
+#### create a storage block and credential block
 python gcp_storage_block.py  
 
-##### to create a prefect worker agent
+#### to create a prefect worker agent
 prefect agent start --work-queue default
 
-##### deploy the flow and tasks with a schedule to run every 15mins
+#### deploy the flow and tasks with a schedule to run every 15mins
 prefect deployment build ./injest_tweet.py:etl_gcp -n 'scheduled_twitter_prefect_deployment' --cron "*/15 * * * *" -a
 
 
