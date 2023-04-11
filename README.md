@@ -3,7 +3,7 @@
 
 This capstone project was developed under the scope of the [Data Engineer Zoomcamp by DataTalksClub](https://github.com/DataTalksClub/data-engineering-zoomcamp) (the biggest Data community in the internet - [DTC](https://datatalks.club/)).
 
-This is a data engineering project fetches the trending keyworks in nigeria every 15mins.  
+This is a data engineering project that fetches the trending tweets in nigeria.  
 
 The trending data is gotten from twitter trends Api and saved to a data lake(google cloud storage).  
 
@@ -16,7 +16,7 @@ With pyspark running in a docker container, a batch process is submitted every 1
 4. Save both top trending and emerging trends to a data warehouse (bigquery)
 
 
-## Used Technologies 🔨
+## Technologies used 🔨
 
 For this project I decided to use the following tools:
 - Docker - TO build containers for running the Spark master and workers;
@@ -64,6 +64,14 @@ ACCESS_TOKEN=2*****************<br>
 ACCESS_TOKEN_SECRET=***********<br>
 
 
+### install requirements
+from project root directory run
+1. `sudo apt install python3-venv`
+2. `python3 -m venv env`
+3. `source env/bin/activate`
+5. `pip install -r requirements.txt`
+
+
 ### installing docker
 1. `sudo apt-get update`
 2. `sudo apt-get install docker.io`
@@ -109,21 +117,12 @@ from the home directory
     - `terraform apply`
 
 
-
 ### pyspark
 from project root directory
 1. `cd spark`
 2. `source build.sh`
 3. `docker compose up -d`
 4. `chmod +x run-docker.sh`
-
-
-### install requirements
-from project root directory run
-1. `sudo apt install python3-venv`
-2. `python3 -m venv env`
-3. `source env/bin/activate`
-5. `pip install -r requirements.txt`
 
 
 ### prefect
