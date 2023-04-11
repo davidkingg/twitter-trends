@@ -85,11 +85,11 @@ on your home directory run the following commands
 
 ### Google setup
 create a project on GCP
-create a service account with cloud storage, bigquery permissions
-download the service accouint credentials json and save it as twitter_project.json in the project roor directory
-from project directory, run the following commands
-1. export GOOGLE_APPLICATION_CREDENTIALS=./twitter_project.json
-2. gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+create a service account with cloud storage, bigquery permissions <br>
+download the service accouint credentials json and save it as twitter_project.json in the project roor directory <br>
+from project directory, run the following commands <br>
+1. export GOOGLE_APPLICATION_CREDENTIALS=./twitter_project.json <br>
+2. gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS <br>
 
 
 ### terrafoam
