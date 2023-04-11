@@ -1,5 +1,5 @@
-# Twitter Trends in Nigeria 😎
-## Data Engineer Zoomcamp Capstone Project
+# Twitter Trends in Nigeria 😎 ![twitter](https://github.com/davidkingg/twitter-trends/blob/main/utills/twitter-logo-2429%20(1).png)
+## Data Engineer Zoomcamp Capstone Project 
 
 This capstone project was developed under the scope of the [Data Engineer Zoomcamp by DataTalksClub](https://github.com/DataTalksClub/data-engineering-zoomcamp) (the biggest Data community in the internet - [DTC](https://datatalks.club/)).
 
