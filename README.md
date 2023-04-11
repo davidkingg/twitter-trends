@@ -57,10 +57,10 @@ PROJECT_ID=*****
 SERVICE_ACCOUNT_CREDENTIALS=./twitter_project.json
 GCS_BUCKET_NAME=twitter_data_twitter-project-381411
 #### twitter api
-CONSUMER_KEY=76s*******************
-CONSUMER_SECRET=BE*********************************************
-ACCESS_TOKEN=2**************************************************
-ACCESS_TOKEN_SECRET=********************************************
+CONSUMER_KEY=76s******** <br>
+CONSUMER_SECRET=Bd************<br>
+ACCESS_TOKEN=2*********************************************<br>
+ACCESS_TOKEN_SECRET=***************************************
 
 
 ### installing docker
