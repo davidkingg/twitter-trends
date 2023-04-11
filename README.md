@@ -32,8 +32,8 @@ For this project I decided to use the following tools:
 
 You can explore the final dashboard [here](https://lookerstudio.google.com/reporting/9c44d5b0-c85e-4061-9d68-65c0ce5946d4).
 
-![Dashboard Page 1](https://github.com/davidkingg/twitter-trends/tree/main/utils/dashboard1.png)
-![Dashboard Page 2](https://github.com/davidkingg/twitter-trends/tree/main/utills/dashboard2.png)
+![Dashboard Page 1](https://github.com/davidkingg/twitter-trends/blob/main/utills/dashboard1.png)
+![Dashboard Page 2](https://github.com/davidkingg/twitter-trends/blob/main/utills/dashboard2.png)
 
 </br>
 </br>
