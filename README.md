@@ -1,5 +1,9 @@
-# Twitter Trends in Nigeria
-This is a data engineering project that fetches the trending keyworks in nigeria every 15mins.  
+# Twitter Trends in Nigeria 😎
+## Data Engineer Zoomcamp Capstone Project
+
+This capstone project was developed under the scope of the [Data Engineer Zoomcamp by DataTalksClub](https://github.com/DataTalksClub/data-engineering-zoomcamp) (the biggest Data community in the internet - [DTC](https://datatalks.club/)).
+
+This is a data engineering project fetches the trending keyworks in nigeria every 15mins.  
 
 The trending data is gotten from twitter trends Api and saved to a data lake(google cloud storage).  
 
@@ -11,11 +15,31 @@ With pyspark running in a docker container, a batch process is submitted every 1
 3. Extract newly emerging trending keywords in the last 1 hour
 4. Save both top trending and emerging trends to a data warehouse (bigquery)
 
-# Dashbord link to visualize the trending tweets in nigeria
-https://lookerstudio.google.com/reporting/9c44d5b0-c85e-4061-9d68-65c0ce5946d4
+
+## Used Technologies 🔨
+
+For this project I decided to use the following tools:
+- Docker - TO build containers for running the Spark master and workers;
+- Prefect - For orchestrating the full pipeline;
+- Terraform - As a Infrastructure-as-Code (IaC) tool;
+- Google Cloud Storage (GCS) - for storage as Data Lake;
+- BigQuery- for the project Data Warehouse;
+- Spark - for Batch processing and data transformation;
+- Google Data studio - for visualizations.
 
 
-## setting up the project locally or on the cloud
+## Dashboard Preview
+
+You can explore the final dashboard [here](https://lookerstudio.google.com/reporting/9c44d5b0-c85e-4061-9d68-65c0ce5946d4).
+
+![Dashboard Page 1](utils/dashboard1.png)
+![Dashboard Page 2](utils/dashboard2.png)
+
+</br>
+</br>
+
+
+## Development Steps 🚧
 
 ### environment variables
 The environment variables are sectioned into 3
