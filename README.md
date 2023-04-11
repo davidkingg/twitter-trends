@@ -50,8 +50,8 @@ The environment variables are sectioned into 3
 
 create a .env file with the following config
 #### prefect blocks
-GCP_CREDENTIALS_BLOCK_NAME=twitter-gcs-cred
-TWITTER_BUCKET_BLOCK_NAME=twitter-gcs-cred
+GCP_CREDENTIALS_BLOCK_NAME=twitter-gcs-cred <br>
+TWITTER_BUCKET_BLOCK_NAME=twitter-gcs-cred <br>
 #### Google cloud platform
 PROJECT_ID=*****
 SERVICE_ACCOUNT_CREDENTIALS=./twitter_project.json
@@ -59,8 +59,8 @@ GCS_BUCKET_NAME=twitter_data_twitter-project-381411
 #### twitter api
 CONSUMER_KEY=76s******** <br>
 CONSUMER_SECRET=Bd************<br>
-ACCESS_TOKEN=2*********************************************<br>
-ACCESS_TOKEN_SECRET=***************************************
+ACCESS_TOKEN=2*****************<br>
+ACCESS_TOKEN_SECRET=***********<br>
 
 
 ### installing docker
