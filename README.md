@@ -3,7 +3,7 @@
 
 This capstone project was developed under the scope of the [Data Engineer Zoomcamp by DataTalksClub](https://github.com/DataTalksClub/data-engineering-zoomcamp) (the biggest Data community in the internet - [DTC](https://datatalks.club/)).
 
-This is a data engineering project that fetches the trending tweets in nigeria.  
+The goal of this project is to retreive the trending tweets in Nigeria on a periodic basic.  
 
 The trending data is gotten from twitter trends Api and saved to a data lake(google cloud storage).  
 
